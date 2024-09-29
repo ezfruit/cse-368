@@ -6,11 +6,19 @@ Our motivation for making an AI chatbot is to provide quick, instant answers and
 Proposed Timeline
 
 Week 1: Researching and gathering UB-related FAQs and data (from the UB website, course schedules, etc.).
+
 Week 2: Start setting up the NLP model 
+
 Week 3: Building the database or API
+
 Week 4: Develop a basic chatbot
+
 Week 5: Test the chatbot with different UB-related questions.
+
 Week 6: Finalize chatbot UI (web-based or messaging app)
+
 Week 7: Implement additional features if needed
+
 Week 8: Final testing and debugging
+
 Week 9: Documentation, final project submission, and presentation preparation.
