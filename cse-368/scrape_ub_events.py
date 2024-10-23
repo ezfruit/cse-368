@@ -6,7 +6,6 @@ import csv
 
 driver = webdriver.Firefox()
 
-
 url = 'https://calendar.buffalo.edu/'
 driver.get(url)
 
