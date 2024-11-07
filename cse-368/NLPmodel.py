@@ -1,18 +1,25 @@
 import pandas as pd
+import spacy
 
-from datetime import datetime
+nlp = spacy.load("en_core_web_sm")
+
 
 data = pd.read_csv('cse-368/ub_events.csv')
 
+
 def find_event(query):
-    results = []
-    query = query.lower()
+
+    doc = nlp(query.lower())
+
+    dates = [ent.text for ent in doc.ents if ent.label_ in ("DATE", "TIME")]
+    keywords = [token.text for token in doc if token.is_alpha and not token.is_stop]
     
+    results = []
     for _, row in data.iterrows():
         event_name = row['Event Name'].lower()
         date_and_time = row['Date and Time'].lower()
         
-        if query in event_name or query in date_and_time:
+        if any(keyword in event_name for keyword in keywords) or any(date in date_and_time for date in dates):
             event_info = f"Event: {row['Event Name']}\nDate & Time: {row['Date and Time']}\nURL: {row['URL']}\n"
             results.append(event_info)
     
@@ -20,10 +27,9 @@ def find_event(query):
         return "Sorry, no events found for your query."
     return "\n".join(results)
 
-# Interactive chatbot
 def chatbot():
     print("Welcome to the Event Finder Chatbot!")
-    print("Ask me about events, like 'basketball' or 'October 22?'")
+    print("Ask me about events, like 'Tell me about basketball' or 'What events are on October 22?'")
     
     while True:
         query = input("You: ")
@@ -33,5 +39,5 @@ def chatbot():
         response = find_event(query)
         print("Bot:", response)
 
-
+# Run the chatbot
 chatbot()
