@@ -4,3 +4,8 @@ Flask-PyMongo~=2.3.0
 pymongo
 requests
 beautifulsoup4
+chatterbot
+chatterbot.trainers
+pandas
+selenium
+selenium.webdriver.common.by

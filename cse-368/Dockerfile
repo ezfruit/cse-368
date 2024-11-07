@@ -1,7 +1,7 @@
 FROM python:3.12.6
 
-ENV HOME /root
-WORKDIR /root
+ENV HOME /app
+WORKDIR /app
 
 COPY . .
 
