@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UB AI Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body onload="refresh()">
+    <div class="message-container">
+        <div class="header">
+            <h1>UB AI Chatbot</h1>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+        <div class="user-container">
+            <input id="user-input" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+            <button id="input-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetches the chat messages div
+        const chatMessages = document.getElementById("chat-messages");
+        
+        // Handles sending messages
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input");
+            const userMessage = userInput.value.trim();
+
+            if (userMessage) {
+                // Append user's message to the chat
+                appendMessage("user", userMessage);
+
+                // Send user message to server
+                try {
+                    const response = await fetch('/message_sent', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userMessage })
+                    });
+
+                    const data = await response.json();
+                    const botMessage = data[1].message;
+
+                    // Append bot's response to the chat
+                    appendMessage("bot", botMessage);
+                } catch (error) {
+                    console.error("Error sending message:", error);
+                    appendMessage("bot", "Sorry, there was an error processing your request.");
+                }
+
+                // Clear input field
+                userInput.value = "";
+            }
+        }
+
+        // Appends a message to the chat
+        function appendMessage(sender, message) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.textContent = sender === "user" ? `You: ${message}` : `Bot: ${message}`;
+            chatMessages.appendChild(messageDiv);
+
+            // Scroll to the bottom of the chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Handle Enter key press to send a message
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        // Refreshes the chat when loaded
+        function refresh() {
+            appendMessage("bot", "Hello! How can I assist you today?");
+        }
+    </script>
+</body>
+</html>
