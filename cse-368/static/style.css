@@ -1,68 +1,119 @@
+
 body {
-    height: 100vh;               
-    margin: 0;  
-    align-items: center;                  
-    display: flex;                
-    justify-content: center;      
-    background-color: #ccadad;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    background-color: rgb(51, 50, 50); 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; /* iPhone system font */
 }
 
-
+/* Main Container */
 .message-container {
-    border: 1px black;
-    overflow: hidden;
     width: 400px;
     height: 650px;
-    background-color: aqua;
+    background-color: #ffffff;
     border-radius: 20px;
     display: flex;
-    flex-direction: column; 
-}
-
-.chat-messages {
-    overflow: auto;
-    padding: 30px;
-    display: flex;
-    flex-grow: 1;
     flex-direction: column;
-    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    overflow: hidden;
 }
 
-.user-container{
-    flex-direction: None; 
+/* Chat Messages Section */
+.chat-messages {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
     display: flex;
-    align-items:center;
+    flex-direction: column;
+    gap: 15px; /* Space between messages */
+}
+
+/* User Input Section */
+.user-container {
+    display: flex;
+    align-items: center;
     justify-content: center;
     gap: 10px;
     margin: 10px 0;
-    
 }
+
+/* Input field styling */
 #user-input {
-    border-radius: 20px;
-    width: 200px;
-    height: 30px;
-
+    width: 70%;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: 1px solid #D1D1D1;
+    font-size: 16px;
+    background-color: #F8F8F8;
 }
 
-#input-button{
-    border-radius: 20px;
+/* Send button styling */
+#input-button {
     width: 50px;
-    height: 30px;
-
+    height: 50px;
+    border-radius: 25px;
+    background-color: #0033A0;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Send button hover effect */
+#input-button:hover {
+    background-color: #D79B00;  /* Softer UB Gold on hover */
+}
+
+/* User Messages */
 .user {
-    background-color: blueviolet;
-    align-self: flex-end; 
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
+    background-color: #0033A0;
+    color: white;
+    align-self: flex-end;        /* Right-align user message */
+    border-radius: 18px;
+    padding: 12px;
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Bot Messages */
 .bot {
-    background-color: #f8d7da; 
-    align-self: flex-start; 
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
+    background-color: #D79B00;  /* Softer UB Gold for bot */
+    color: white;
+    align-self: flex-start;      /* Left-align bot message */
+    border-radius: 18px;
+    padding: 12px;
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Message container */
+.message {
+    display: inline-block;
+    max-width: 80%;
+    word-wrap: break-word;
+    margin-bottom: 10px; /* Added bottom margin to create space between consecutive messages */
+}
+
+/* For clickable links in messages */
+a {
+    color: #0033A0;  /* UB Blue color for links */
+    text-decoration: none;  /* Remove underline from links */
+    font-weight: bold;  /* Make links stand out */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
+/* Remove focus outline on input and button */
+input:focus, button:focus {
+    outline: none;
 }
